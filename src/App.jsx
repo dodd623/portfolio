@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
     document.body.style.margin = "0";
@@ -13,6 +14,12 @@ export default function App() {
     document.body.style.color = darkMode ? "#e2e8f0" : "#0f172a";
   }, [darkMode]);
 
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const theme = useMemo(
     () => ({
       pageText: darkMode ? "#e2e8f0" : "#0f172a",
@@ -21,7 +28,6 @@ export default function App() {
       cardBorder: darkMode ? "rgba(148, 163, 184, 0.18)" : "rgba(15, 23, 42, 0.08)",
       navBg: darkMode ? "rgba(2, 6, 23, 0.72)" : "rgba(255, 255, 255, 0.75)",
       accent: "#3b82f6",
-      accentSoft: darkMode ? "rgba(59, 130, 246, 0.18)" : "rgba(59, 130, 246, 0.10)",
       shadow: darkMode
         ? "0 20px 60px rgba(0, 0, 0, 0.35)"
         : "0 20px 60px rgba(15, 23, 42, 0.10)",
@@ -131,16 +137,17 @@ export default function App() {
       margin: "0 auto",
       display: "flex",
       justifyContent: "space-between",
-      alignItems: "center",
+      alignItems: isMobile ? "flex-start" : "center",
+      flexDirection: isMobile ? "column" : "row",
       padding: "1rem 0",
       gap: "1rem",
     },
     navLinks: {
       display: "flex",
-      gap: "1.25rem",
+      gap: isMobile ? "1rem" : "1.25rem",
       flexWrap: "wrap",
       alignItems: "center",
-      fontSize: "0.95rem",
+      fontSize: isMobile ? "1rem" : "0.95rem",
     },
     link: {
       color: theme.secondaryText,
@@ -165,14 +172,15 @@ export default function App() {
       cursor: "pointer",
       fontWeight: 600,
       backdropFilter: "blur(12px)",
+      alignSelf: isMobile ? "flex-start" : "auto",
     },
     hero: {
       display: "grid",
-      gridTemplateColumns: "1.15fr 0.85fr",
+      gridTemplateColumns: isMobile ? "1fr" : "1.15fr 0.85fr",
       gap: "2rem",
       alignItems: "center",
-      minHeight: "92vh",
-      padding: "3rem 0 4rem",
+      minHeight: isMobile ? "auto" : "92vh",
+      padding: isMobile ? "2rem 0 3rem" : "3rem 0 4rem",
     },
     badge: {
       display: "inline-flex",
@@ -187,8 +195,19 @@ export default function App() {
       fontSize: "0.9rem",
       marginBottom: "1.5rem",
     },
+    headshot: {
+      width: isMobile ? "160px" : "180px",
+      height: isMobile ? "160px" : "180px",
+      borderRadius: "50%",
+      objectFit: "cover",
+      objectPosition: "center 20%",
+      display: "block",
+      border: "3px solid rgba(59,130,246,0.5)",
+      boxShadow: "0 10px 30px rgba(59,130,246,0.25)",
+      flexShrink: 0,
+    },
     heroTitle: {
-      fontSize: "clamp(2.5rem, 6vw, 4rem)",
+      fontSize: isMobile ? "3.2rem" : "clamp(2.75rem, 6vw, 5rem)",
       lineHeight: 1,
       margin: 0,
       letterSpacing: "-0.04em",
@@ -198,14 +217,14 @@ export default function App() {
         : "0 1px 0 rgba(255,255,255,0.75)",
     },
     heroSubtitle: {
-      fontSize: "clamp(1.2rem, 2vw, 1.7rem)",
+      fontSize: isMobile ? "1rem" : "clamp(1.2rem, 2vw, 1.7rem)",
       marginTop: "1rem",
       marginBottom: "1rem",
       color: darkMode ? "#cbd5e1" : "#334155",
       fontWeight: 600,
     },
     heroText: {
-      fontSize: "1.08rem",
+      fontSize: isMobile ? "1rem" : "1.08rem",
       lineHeight: 1.8,
       maxWidth: "42rem",
       color: theme.secondaryText,
@@ -216,6 +235,7 @@ export default function App() {
       flexWrap: "wrap",
       marginTop: "2rem",
       marginBottom: "1.5rem",
+      justifyContent: isMobile ? "center" : "flex-start",
     },
     primaryButton: {
       display: "inline-flex",
@@ -248,6 +268,7 @@ export default function App() {
       flexWrap: "wrap",
       gap: "0.85rem",
       marginTop: "1rem",
+      justifyContent: isMobile ? "center" : "flex-start",
     },
     socialLink: {
       color: theme.pageText,
@@ -270,24 +291,8 @@ export default function App() {
       padding: "2rem",
       position: "relative",
     },
-    headshotWrap: {
-      marginTop: "1rem",
-      marginBottom: "1.5rem",
-      borderRadius: "24px",
-      overflow: "hidden",
-    },
-    headshot: {
-  width: "160px",
-  height: "160px",
-  borderRadius: "50%",
-  objectFit: "cover",
-  objectPosition: "center 20%",
-  border: "3px solid rgba(59,130,246,0.5)",
-  boxShadow: "0 10px 30px rgba(59,130,246,0.25)",
-  marginBottom: "1.5rem",
-},
     section: {
-      padding: "5rem 0",
+      padding: isMobile ? "3.5rem 0" : "5rem 0",
     },
     sectionEyebrow: {
       color: theme.accent,
@@ -296,20 +301,23 @@ export default function App() {
       fontWeight: 700,
       fontSize: "0.82rem",
       marginBottom: "0.7rem",
+      textAlign: isMobile ? "center" : "left",
     },
     sectionTitle: {
-      fontSize: "clamp(2rem, 3vw, 3rem)",
+      fontSize: isMobile ? "2.2rem" : "clamp(2rem, 3vw, 3rem)",
       margin: 0,
       letterSpacing: "-0.03em",
+      textAlign: isMobile ? "center" : "left",
     },
     sectionText: {
       color: theme.secondaryText,
       lineHeight: 1.8,
       fontSize: "1rem",
+      textAlign: isMobile ? "center" : "left",
     },
     projectGrid: {
       display: "grid",
-      gridTemplateColumns: "1.25fr 0.75fr",
+      gridTemplateColumns: isMobile ? "1fr" : "1.25fr 0.75fr",
       gap: "1.5rem",
       marginTop: "2rem",
     },
@@ -329,16 +337,19 @@ export default function App() {
       fontSize: "0.85rem",
       marginBottom: "1rem",
       border: `1px solid ${theme.cardBorder}`,
+      alignSelf: isMobile ? "center" : "flex-start",
     },
     cardTitle: {
       fontSize: "1.7rem",
       margin: "0 0 1rem",
+      textAlign: isMobile ? "center" : "left",
     },
     highlightRow: {
       display: "flex",
       flexWrap: "wrap",
       gap: "0.7rem",
       marginTop: "1.5rem",
+      justifyContent: isMobile ? "center" : "flex-start",
     },
     chip: {
       borderRadius: "999px",
@@ -350,7 +361,7 @@ export default function App() {
     },
     skillsGrid: {
       display: "grid",
-      gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+      gridTemplateColumns: isMobile ? "1fr" : "repeat(4, minmax(0, 1fr))",
       gap: "1.5rem",
       marginTop: "2rem",
     },
@@ -359,7 +370,7 @@ export default function App() {
     },
     aboutGrid: {
       display: "grid",
-      gridTemplateColumns: "1.1fr 0.9fr",
+      gridTemplateColumns: isMobile ? "1fr" : "1.1fr 0.9fr",
       gap: "2rem",
       alignItems: "start",
       marginTop: "1.5rem",
@@ -368,6 +379,7 @@ export default function App() {
       color: theme.secondaryText,
       lineHeight: 1.9,
       fontSize: "1rem",
+      textAlign: isMobile ? "center" : "left",
     },
     aboutLink: {
       color: darkMode ? "#93c5fd" : "#2563eb",
@@ -384,14 +396,17 @@ export default function App() {
       border: `1px solid ${theme.cardBorder}`,
       background: darkMode ? "rgba(2, 6, 23, 0.24)" : "rgba(255,255,255,0.68)",
       color: theme.panelText,
+      textAlign: "center",
     },
     resumeCard: {
       padding: "2rem",
       display: "flex",
       justifyContent: "space-between",
-      alignItems: "center",
+      alignItems: isMobile ? "flex-start" : "center",
+      flexDirection: isMobile ? "column" : "row",
       gap: "1.5rem",
       flexWrap: "wrap",
+      textAlign: isMobile ? "center" : "left",
     },
     contactWrap: {
       padding: "2rem",
@@ -405,7 +420,7 @@ export default function App() {
     },
     contactGrid: {
       display: "grid",
-      gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+      gridTemplateColumns: isMobile ? "1fr" : "repeat(3, minmax(0, 1fr))",
       gap: "1rem",
       marginTop: "2rem",
     },
@@ -416,6 +431,7 @@ export default function App() {
       borderRadius: "24px",
       border: `1px solid ${theme.cardBorder}`,
       background: darkMode ? "rgba(2, 6, 23, 0.26)" : "rgba(255,255,255,0.72)",
+      textAlign: "center",
     },
     footerSpace: {
       height: "3rem",
@@ -449,12 +465,24 @@ export default function App() {
 
       <main style={styles.container}>
         <section style={styles.hero} id="home">
-          <div>
+          <div style={{ textAlign: isMobile ? "center" : "left" }}>
             <div style={styles.badge}>✦ AI-Focused Builder</div>
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1rem" }}>
-  <img src={headshot} alt="Devin J Dodd" style={styles.headshot} />
-  <h1 style={styles.heroTitle}>Devin J Dodd</h1>
-</div>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: isMobile ? "column" : "row",
+                gap: isMobile ? "1rem" : "1rem",
+                marginBottom: "1rem",
+                textAlign: isMobile ? "center" : "left",
+                justifyContent: isMobile ? "center" : "flex-start",
+              }}
+            >
+              <img src={headshot} alt="Devin J Dodd" style={styles.headshot} />
+              <h1 style={styles.heroTitle}>Devin J Dodd</h1>
+            </div>
+
             <div style={styles.heroSubtitle}>
               Software Developer | AI, Automation, and Intelligent Systems
             </div>
@@ -499,6 +527,7 @@ export default function App() {
                 textTransform: "uppercase",
                 fontSize: "0.8rem",
                 marginBottom: "0.75rem",
+                textAlign: "center",
               }}
             >
               Portfolio Snapshot
@@ -506,14 +535,17 @@ export default function App() {
 
             <h2
               style={{
-                marginTop: 0,
-                marginBottom: "1.5rem",
-                fontSize: "1.8rem",
-                color: theme.strongText,
-              }}
+  ...styles.sectionTitle,
+  marginTop: 0,
+  marginBottom: "1.5rem",
+  fontSize: isMobile ? "2rem" : "1.8rem",
+  color: theme.strongText,
+  textAlign: "center",
+}}
             >
               Focused on practical AI systems
             </h2>
+
             <div style={styles.sideStack}>
               <div style={styles.miniPanel}>Building usable AI-powered tools</div>
               <div style={styles.miniPanel}>Combining software engineering with automation</div>
@@ -533,19 +565,17 @@ export default function App() {
                 <div style={{ color: theme.secondaryText }}>Featured projects</div>
               </div>
               <div style={styles.miniPanel}>
-                <div style={{ fontSize: "1.5rem", fontWeight: 800, color: theme.strongText }}>July
-                  2026</div>
-                <div style={{ color: theme.secondaryText }}>Computer Science B.S. expected</div>
+                <div style={{ fontSize: "1.8rem", fontWeight: 800, color: theme.strongText }}>2026</div>
+                <div style={{ color: theme.secondaryText }}>B.S. expected</div>
               </div>
             </div>
           </div>
         </section>
-        
 
         <section id="projects" style={styles.section}>
           <div style={styles.sectionEyebrow}>Featured Projects</div>
           <h2 style={styles.sectionTitle}>Work that reflects how I build</h2>
-          <p style={{ ...styles.sectionText, maxWidth: "48rem", marginTop: "1rem" }}>
+          <p style={{ ...styles.sectionText, maxWidth: "48rem", marginTop: "1rem", marginInline: isMobile ? "auto" : "0" }}>
             A growing collection of projects focused on AI, usability, and systems that solve real problems.
           </p>
 
@@ -565,7 +595,9 @@ export default function App() {
               >
                 <div style={styles.cardTag}>{project.tag}</div>
                 <h3 style={styles.cardTitle}>{project.title}</h3>
-                <p style={styles.sectionText}>{project.description}</p>
+                <p style={{ ...styles.sectionText, textAlign: isMobile ? "center" : "left" }}>
+                  {project.description}
+                </p>
 
                 <div style={styles.highlightRow}>
                   {project.highlights.map((item) => (
@@ -586,7 +618,7 @@ export default function App() {
           <div style={styles.skillsGrid}>
             {skills.map((group) => (
               <div key={group.title} style={{ ...styles.glassCard, ...styles.skillCard }}>
-                <h3 style={{ marginTop: 0, marginBottom: "1rem", fontSize: "1.2rem" }}>
+                <h3 style={{ marginTop: 0, marginBottom: "1rem", fontSize: "1.6rem", textAlign: "center" }}>
                   {group.title}
                 </h3>
                 <div style={styles.highlightRow}>
@@ -714,10 +746,10 @@ export default function App() {
           <div style={{ ...styles.glassCard, ...styles.resumeCard }}>
             <div>
               <div style={styles.sectionEyebrow}>Resume</div>
-              <h2 style={{ ...styles.sectionTitle, fontSize: "2.2rem" }}>
+              <h2 style={{ ...styles.sectionTitle, fontSize: isMobile ? "2rem" : "2.2rem" }}>
                 Education and project-ready experience
               </h2>
-              <p style={{ ...styles.sectionText, maxWidth: "40rem", marginTop: "1rem" }}>
+              <p style={{ ...styles.sectionText, maxWidth: "40rem", marginTop: "1rem", marginInline: isMobile ? "auto" : "0" }}>
                 Download my current resume for a fuller look at my education, technical skills,
                 project work, and professional experience.
               </p>
@@ -733,7 +765,7 @@ export default function App() {
           <div style={styles.contactWrap}>
             <div style={styles.sectionEyebrow}>Contact</div>
             <h2 style={styles.sectionTitle}>Let’s build something meaningful</h2>
-            <p style={{ ...styles.sectionText, maxWidth: "44rem", marginTop: "1rem" }}>
+            <p style={{ ...styles.sectionText, maxWidth: "44rem", marginTop: "1rem", marginInline: "auto" }}>
               Whether it’s AI, automation, developer tooling, or a strong software idea, I’m always
               interested in opportunities to create something useful.
             </p>
