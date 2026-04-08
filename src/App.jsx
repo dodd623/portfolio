@@ -533,8 +533,8 @@ export default function App() {
                 <div style={{ color: theme.secondaryText }}>Featured projects</div>
               </div>
               <div style={styles.miniPanel}>
-                <div style={{ fontSize: "1.8rem", fontWeight: 800, color: theme.strongText }}>2026</div>
-                <div style={{ color: theme.secondaryText }}>B.S. expected</div>
+                <div style={{ fontSize: "1.8rem", fontWeight: 800, color: theme.strongText }}>July2026</div>
+                <div style={{ color: theme.secondaryText }}>Computer Science B.S. expected</div>
               </div>
             </div>
           </div>
