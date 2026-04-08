@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
 
   useEffect(() => {
     document.body.style.margin = "0";
@@ -78,6 +78,8 @@ export default function App() {
         "Workflow automation focus",
       ],
       featured: true,
+      liveLink: "https://lucidscript.fly.dev/",
+      codeLink: "https://github.com/dodd623/LucidScript",
     },
     {
       title: "Silent Front",
@@ -90,6 +92,8 @@ export default function App() {
         "2–8 player design direction",
       ],
       featured: false,
+      liveLink: "",
+      codeLink: "",
     },
   ];
 
@@ -327,6 +331,15 @@ export default function App() {
       display: "flex",
       flexDirection: "column",
     },
+    featureCard: {
+      transform: isMobile ? "none" : "scale(1.03)",
+      border: `1px solid ${
+        darkMode ? "rgba(59,130,246,0.35)" : "rgba(59,130,246,0.22)"
+      }`,
+      boxShadow: darkMode
+        ? "0 24px 70px rgba(37, 99, 235, 0.20)"
+        : "0 24px 70px rgba(37, 99, 235, 0.12)",
+    },
     cardTag: {
       display: "inline-block",
       padding: "0.45rem 0.8rem",
@@ -535,13 +548,13 @@ export default function App() {
 
             <h2
               style={{
-  ...styles.sectionTitle,
-  marginTop: 0,
-  marginBottom: "1.5rem",
-  fontSize: isMobile ? "2rem" : "1.8rem",
-  color: theme.strongText,
-  textAlign: "center",
-}}
+                ...styles.sectionTitle,
+                marginTop: 0,
+                marginBottom: "1.5rem",
+                fontSize: isMobile ? "2rem" : "1.8rem",
+                color: theme.strongText,
+                textAlign: "center",
+              }}
             >
               Focused on practical AI systems
             </h2>
@@ -575,7 +588,14 @@ export default function App() {
         <section id="projects" style={styles.section}>
           <div style={styles.sectionEyebrow}>Featured Projects</div>
           <h2 style={styles.sectionTitle}>Work that reflects how I build</h2>
-          <p style={{ ...styles.sectionText, maxWidth: "48rem", marginTop: "1rem", marginInline: isMobile ? "auto" : "0" }}>
+          <p
+            style={{
+              ...styles.sectionText,
+              maxWidth: "48rem",
+              marginTop: "1rem",
+              marginInline: isMobile ? "auto" : "0",
+            }}
+          >
             A growing collection of projects focused on AI, usability, and systems that solve real problems.
           </p>
 
@@ -586,8 +606,11 @@ export default function App() {
                 style={{
                   ...styles.glassCard,
                   ...styles.projectCard,
+                  ...(project.featured ? styles.featureCard : {}),
                   boxShadow: project.featured
-                    ? theme.shadow
+                    ? darkMode
+                      ? "0 24px 70px rgba(37, 99, 235, 0.20)"
+                      : "0 24px 70px rgba(37, 99, 235, 0.12)"
                     : darkMode
                     ? "0 12px 32px rgba(0,0,0,0.22)"
                     : "0 12px 32px rgba(15,23,42,0.08)",
@@ -606,6 +629,32 @@ export default function App() {
                     </span>
                   ))}
                 </div>
+
+                {project.featured && (
+                  <div style={{ ...styles.buttonRow, marginTop: "1.5rem", marginBottom: 0 }}>
+                    {project.liveLink && (
+                      <a
+                        href={project.liveLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={styles.primaryButton}
+                      >
+                        View Project →
+                      </a>
+                    )}
+
+                    {project.codeLink && (
+                      <a
+                        href={project.codeLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={styles.secondaryButton}
+                      >
+                        View Code
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -749,7 +798,14 @@ export default function App() {
               <h2 style={{ ...styles.sectionTitle, fontSize: isMobile ? "2rem" : "2.2rem" }}>
                 Education and project-ready experience
               </h2>
-              <p style={{ ...styles.sectionText, maxWidth: "40rem", marginTop: "1rem", marginInline: isMobile ? "auto" : "0" }}>
+              <p
+                style={{
+                  ...styles.sectionText,
+                  maxWidth: "40rem",
+                  marginTop: "1rem",
+                  marginInline: isMobile ? "auto" : "0",
+                }}
+              >
                 Download my current resume for a fuller look at my education, technical skills,
                 project work, and professional experience.
               </p>
@@ -765,7 +821,14 @@ export default function App() {
           <div style={styles.contactWrap}>
             <div style={styles.sectionEyebrow}>Contact</div>
             <h2 style={styles.sectionTitle}>Let’s build something meaningful</h2>
-            <p style={{ ...styles.sectionText, maxWidth: "44rem", marginTop: "1rem", marginInline: "auto" }}>
+            <p
+              style={{
+                ...styles.sectionText,
+                maxWidth: "44rem",
+                marginTop: "1rem",
+                marginInline: "auto",
+              }}
+            >
               Whether it’s AI, automation, developer tooling, or a strong software idea, I’m always
               interested in opportunities to create something useful.
             </p>
