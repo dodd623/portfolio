@@ -82,10 +82,10 @@ export default function App() {
       codeLink: "https://github.com/dodd623/LucidScript",
     },
     {
-      title: "Silent Front",
+      title: "Tile Wars",
       tag: "Work In Progress",
       description:
-        "A top-down, grid-based strategy concept blending board game tension with AI-driven opponents, tactical decision making, and multiplayer potential.",
+        "A grid-based strategy concept blending board game tension with AI-driven opponents, tactical decision making, and multiplayer potential. Right now, capable of matches of any combination of human and AI players, up to 8 total.",
       highlights: [
         "Grid-based systems",
         "AI behavior design",
