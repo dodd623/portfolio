@@ -82,19 +82,19 @@ export default function App() {
       codeLink: "https://github.com/dodd623/LucidScript",
     },
     {
-      title: "Tile Wars",
-      tag: "Work In Progress",
-      description:
-        "A grid-based strategy concept blending board game tension with AI-driven opponents, tactical decision making, and multiplayer potential. Right now, capable of matches of any combination of human and AI players, up to 8 total.",
-      highlights: [
-        "Grid-based systems",
-        "AI behavior design",
-        "2–8 player design direction",
-      ],
-      featured: false,
-      liveLink: "",
-      codeLink: "",
-    },
+  title: "Tile Wars",
+  tag: "Playable Demo",
+  description:
+    "A turn-based grid strategy game where players battle for territory, expand across the board, and outmaneuver opponents through tactical tile control.",
+  highlights: [
+    "Grid-based territory control",
+    "AI opponent behavior",
+    "Playable browser demo",
+  ],
+  featured: false,
+  liveLink: "https://dodd623.itch.io/tile-wars",
+  codeLink: "https://github.com/dodd623/tile-wars",
+},
   ];
 
   const styles = {
@@ -630,30 +630,30 @@ export default function App() {
                   ))}
                 </div>
 
-                {project.featured && (
+                {(project.featured || project.liveLink || project.codeLink) && (
                   <div style={{ ...styles.buttonRow, marginTop: "1.5rem", marginBottom: 0 }}>
-                    {project.liveLink && (
-                      <a
-                        href={project.liveLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={styles.primaryButton}
-                      >
-                        View Project →
-                      </a>
-                    )}
+  {project.liveLink && (
+    <a
+      href={project.liveLink}
+      target="_blank"
+      rel="noreferrer"
+      style={styles.primaryButton}
+    >
+      {project.title === "Tile Wars" ? "Play Game →" : "View Project →"}
+    </a>
+  )}
 
-                    {project.codeLink && (
-                      <a
-                        href={project.codeLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={styles.secondaryButton}
-                      >
-                        View Code
-                      </a>
-                    )}
-                  </div>
+  {project.codeLink && (
+    <a
+      href={project.codeLink}
+      target="_blank"
+      rel="noreferrer"
+      style={styles.secondaryButton}
+    >
+      View Code
+    </a>
+  )}
+</div>
                 )}
               </div>
             ))}
