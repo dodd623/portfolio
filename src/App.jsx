@@ -631,7 +631,7 @@ export default function App() {
                 </div>
 
                 {(project.featured || project.liveLink || project.codeLink) && (
-                  <div style={{ ...styles.buttonRow, marginTop: "1.5rem", marginBottom: 0 }}>
+                  <div style={{ ...styles.buttonRow, marginTop: "1.5rem" }}>
   {project.liveLink && (
     <a
       href={project.liveLink}
