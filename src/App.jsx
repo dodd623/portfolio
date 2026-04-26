@@ -460,8 +460,17 @@ export default function App() {
 
       <header style={styles.nav}>
         <div style={styles.navInner}>
-          <a href="#home" style={{ ...styles.logo, textDecoration: "none" }}>
-            DJD
+          <a href="#home" style={{ display: "flex", alignItems: "center" }}>
+            <img
+              src="/DJD-logo.png"
+              alt="DJD Logo"
+              style={{
+                height: isMobile ? "32px" : "40px",
+                width: "auto",
+                objectFit: "contain",
+                filter: "drop-shadow(0 0 6px rgba(59,130,246,0.35))",
+              }}
+            />
           </a>
 
           <nav style={styles.navLinks}>
