@@ -503,8 +503,9 @@ export default function App() {
             </div>
             <p style={styles.heroText}>
               I build AI-powered tools that automate real workflows, reduce manual work, and turn messy processes into clean, usable systems.
-              <br /><br />
-              Built and deployed live AI applications used in real workflows.
+              <span style={{ display: "block", marginTop: "0.8rem" }}>
+                Built and deployed live AI applications used in real-world workflows.
+              </span>
             </p>
 
             <div style={styles.buttonRow}>
