@@ -44,7 +44,7 @@ export default function App() {
     [darkMode]
   );
 
-  const resumeLink = "/Devin_Dodd_Resume.docx";
+  const resumeLink = "/Devin_Dodd_Resume.pdf";
   const headshot = "/Portfolio-Headshot.jpg";
 
   const skills = [
@@ -70,6 +70,7 @@ export default function App() {
     {
       title: "LucidScript",
       tag: "Flagship Project",
+      image: "/LucidScript.png",
       description:
         "An AI-powered transcription and workflow automation tool built to transform spoken audio into structured, usable text through a practical end-to-end processing pipeline.",
       highlights: [
@@ -84,8 +85,9 @@ export default function App() {
     {
   title: "Tile Wars",
   tag: "Playable Demo",
+  image: "/TileWars.png",
   description:
-    "A turn-based grid strategy game where players battle for territory, expand across the board, and outmaneuver opponents through tactical tile control.",
+    "A turn-based grid strategy game where players battle for territory, expand across the board, and outmaneuver opponents through tactical tile control. Follow the instructions on the home page to play the browser demo and experience the AI opponent in action.",
   highlights: [
     "Grid-based territory control",
     "AI opponent behavior",
@@ -616,6 +618,24 @@ export default function App() {
                     : "0 12px 32px rgba(15,23,42,0.08)",
                 }}
               >
+
+                {/* ✅ IMAGE GOES HERE */}
+                {project.image && (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    style={{
+                      width: "100%",
+                      height: isMobile ? "140px" : "180px",
+                      objectFit: "contain",
+                      background: "rgba(255,255,255,0.03)",
+                      padding: "1rem",
+                      borderRadius: "12px",
+                      marginBottom: "1rem",
+                    }}
+                  />
+                )}
+
                 <div style={styles.cardTag}>{project.tag}</div>
                 <h3 style={styles.cardTitle}>{project.title}</h3>
                 <p style={{ ...styles.sectionText, textAlign: isMobile ? "center" : "left" }}>
@@ -812,7 +832,7 @@ export default function App() {
             </div>
 
             <a href={resumeLink} style={styles.primaryButton} download>
-              Download Resume
+              View Resume
             </a>
           </div>
         </section>
