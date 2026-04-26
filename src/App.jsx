@@ -45,7 +45,7 @@ export default function App() {
   );
 
   const resumeLink = "/Devin_Dodd_Resume.pdf";
-  const headshot = "/LinkedIn PFP.jpg";
+  const headshot = "/LinkedIn_PFP.png";
 
   const skills = [
     {
