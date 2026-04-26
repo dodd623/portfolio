@@ -499,11 +499,12 @@ export default function App() {
             </div>
 
             <div style={styles.heroSubtitle}>
-              Software Developer | AI, Automation, and Intelligent Systems
+              Software Developer focused on AI, Automation, and Real-World Systems
             </div>
             <p style={styles.heroText}>
-              I build AI-powered software that simplifies everyday work and helps people
-              focus on what actually matters.
+              I build AI-powered tools that automate real workflows, reduce manual work, and turn messy processes into clean, usable systems.
+              <br /><br />
+              Built and deployed live AI applications used in real workflows.
             </p>
 
             <div style={styles.buttonRow}>
@@ -563,7 +564,7 @@ export default function App() {
 
             <div style={styles.sideStack}>
               <div style={styles.miniPanel}>Building usable AI-powered tools</div>
-              <div style={styles.miniPanel}>Combining software engineering with automation</div>
+              <div style={styles.miniPanel}>Bridging software engineering and automation</div>
               <div style={styles.miniPanel}>Designing systems with real-world value</div>
             </div>
 
