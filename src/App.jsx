@@ -206,10 +206,10 @@ export default function App() {
       height: isMobile ? "160px" : "180px",
       borderRadius: "50%",
       objectFit: "cover",
-      objectPosition: "center 20%",
+      objectPosition: "center 25%",
       display: "block",
       border: "3px solid rgba(59,130,246,0.5)",
-      boxShadow: "0 10px 30px rgba(59,130,246,0.25)",
+      boxShadow: "0 0 15px rgba(59,130,246,0.4)",
       flexShrink: 0,
     },
     heroTitle: {
