@@ -468,6 +468,7 @@ export default function App() {
                 width: "auto",
                 objectFit: "contain",
                 filter: "drop-shadow(0 0 6px rgba(59,130,246,0.35))",
+                marginRight: "0.5rem"
               }}
             />
           </a>
