@@ -462,8 +462,7 @@ export default function App() {
         <div style={styles.navInner}>
           <a href="#home" style={{ display: "flex", alignItems: "center" }}>
             <img
-              src="/DJD-logo.png"
-              alt="DJD Logo"
+              src="/djd-logo.png"
               style={{
                 height: isMobile ? "32px" : "40px",
                 width: "auto",
